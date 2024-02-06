@@ -1,61 +1,23 @@
+/* ***** */
+/* FONT  */
+/* ***** */
+
 @font-face {
     font-family: 'VT323';
     src: url("../fonts/VT323-Regular.ttf");
 }
 
+/* *********** */
+/* BASIC STYLE */
+/* *********** */
+
+:root {
+    --color-bg: ;
+}
+
 html {
     background-color: rgb(204, 208, 245);
-     font-family: "VT323", sans-serif;
-}
-
-.level-info > div {
-    max-width: 20vw;
-    height: 2.5vh;
-    border-radius: 5em;
-    background-color: white;
-}
-
-.level-info > div::after {
-    content: '21%';
-}
-
-.level-info > div > div {
-    max-width: 35%;
-    height: 100%;
-    border-radius: 5em;
-    background-color: rgb(51, 7, 63);
-}
-
-/* styles.css */
-.body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 800px; /* Adjust the perspective for the 3D effect */
-    perspective-origin: center;
-}
-
-.rotation-container {
-    width: 200px;
-    height: 200px;
-    background-color: #3498db;
-    border-radius: 50%;
-    position: relative;
-    transform-style: preserve-3d;
-}
-
-.circling-element {
-    width: 50px;
-    height: 50px;
-    background-color: #e74c3c;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotateY(0deg) translateZ(100px);
-    animation: rotateElement 8s linear infinite;
+    font-family: "VT323", sans-serif;
 }
 
 .rotation {
@@ -81,34 +43,45 @@ html {
 .avatar > div {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
     position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
     top: 50%;
     left: 50%;
     transition: transform 1s ease-in-out; 
 }
 
 .avatar > div:nth-child(1) {
-    background-color: blue;
+    background: url("../img/bio.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     transform: translate(-50%, 100%) rotateY(0deg) translateZ(100px);
 }
 
 .avatar > div:nth-child(2) {
-   background-color: red;
+   background: url("../img/level.png");
+    background-repeat: no-repeat;
+    background-size: cover;
    transform: translate(-50%, 50%) rotateY(72deg) translateZ(100px);
 }
 
 .avatar > div:nth-child(3) {
-   background-color: green;
+   background: url("../img/soundtrack.png");
+    background-repeat: no-repeat;
+    background-size: cover;
    transform: translate(-50%, -50%) rotateY(144deg) translateZ(100px);
 }
 
 .avatar > div:nth-child(4) {
-    background-color: yellow;
+    background: url("../img/nativeto.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     transform: translate(-50%, -50%) rotateY(216deg) translateZ(100px);
 }
 
 .avatar > div:nth-child(5) {
-    background-color: orange;
+    background: url("../img/strengths.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     transform: translate(-50%, 50%) rotateY(288deg) translateZ(100px);
 }
