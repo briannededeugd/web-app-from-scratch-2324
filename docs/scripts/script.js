@@ -1,11 +1,62 @@
 console.log("Hello world");
 
 /**======================
- *    VARIABELEN
+ *    VARIABLES
  *========================**/
-// DIVS met info
+
+// Data JSON
+const data = [
+	{
+		name: "Brianne",
+		nickname: "@bri",
+		level: 20,
+		bio: "Brianne is a third-year Communication & Multimedia Design student. She gains happiness from animals, the color green and pretty environments. Avoid insects, rush hour and long queues to keep her happy!",
+		strengths: ["Cool", "Calm", "Collected"],
+		native: [
+			{ BORN: "Alkmaar" },
+			{ LIVING: "Almere" },
+			{ "OFTEN FOUND IN": "Amsterdam" },
+		],
+		soundtrack: "../audios/dadadadada",
+		favorite_game: [
+			"The Sims",
+			"Minecraft",
+			"Super Mario Bros",
+			"Killer Sudoku",
+		],
+	},
+	{
+		name: "Elaine",
+		nickname: "@elaine",
+		age: 22,
+		bio: "Brianne is a third-year Communication & Multimedia Design student. She gains happiness from animals, the color green and pretty environments. Avoid insects, rush hour and long queues to keep her happy!",
+		strengths: ["Cool", "Calm", "Collected"],
+		native: [
+			{ BORN: "Alkmaar" },
+			{ LIVING: "Almere" },
+			{ "OFTEN FOUND IN": "Amsterdam" },
+		],
+		soundtrack: "../audios/dadadadada",
+		favorite_game: [
+			"The Sims",
+			"Minecraft",
+			"Super Mario Bros",
+			"Killer Sudoku",
+		],
+	},
+];
+console.log("THE DATA:", data);
+
+// Username
+const username = document.querySelector("#username");
+
+// Nickname
+const nickname = document.querySelector("#nickname");
+
+// DIV with information
 const information = document.querySelector(".information");
 
+// Div background image
 const backgroundImageMapping = {
 	strengths: "url('./img/strengthsbox.jpg')",
 	bio: "url('./img/biobox.jpg')",
@@ -14,14 +65,20 @@ const backgroundImageMapping = {
 	native: "url('./img/nativetobox.jpg')",
 };
 
-// Eerst cirkels/iconen
+// Div title
+const infoHeading = document.querySelector("#infoname");
+
+// Div body
+const infoText = document.querySelector("#infotext");
+
+// First circles/icons
 const bio = document.querySelector(".bio");
 const level = document.querySelector(".level");
 const soundtrack = document.querySelector(".soundtrack");
 const native = document.querySelector(".native");
 const strengths = document.querySelector(".strengths");
 
-// Vervolgens bepaal ik de waardes van de graden en posities van de cirkels
+// Then I determine the values of the degrees and positions of the circles
 const degrees = [0, 72, 144, 216, 288];
 const heights = [
 	"-50%, 100%",
@@ -31,7 +88,7 @@ const heights = [
 	"-50%, 50%",
 ];
 
-// Elk element geef ik hun vaste index, dus bio begint altijd bij 0 en dus de standaard hoogte (vooraan en laag) en graden (gecentreerd)
+// I assign each element its fixed index, so bio always starts at 0 and thus the default height (front and low) and degrees (centered)
 let elementDegreesIndex = {
 	strengths: 0,
 	bio: 1,
@@ -40,49 +97,49 @@ let elementDegreesIndex = {
 	native: 4,
 };
 
-// Ook definieer ik dezelfde namen zoals die in de index staan
+// I also define the same names as those in the index
 const elements = { strengths, bio, level, soundtrack, native };
 
-// De elementen moeten roteren als de gebruiker op de knop drukt, dus het element wordt gepakt, de index van dat element wordt gepakt,
-// dan wordt de index gebruikt om de hoogte en positie aan te passen
+// The elements need to rotate when the user clicks the button, so the element is selected, the index of that element is taken,
+// then the index is used to adjust the height and position
 function updateElementRotation(elementKey) {
 	const element = elements[elementKey];
 	let index = elementDegreesIndex[elementKey];
 	let nextIndex = (index + 1) % degrees.length;
 
-	// Check of het element weer naar positie 0 gaat hierna
+	// Check if the element goes back to position 0 after this
 	if (nextIndex === 0) {
-		// Tijdelijk de degree naar 0 zetten
+		// Temporarily set the degree to 0
 		element.style.transition = "transform 0.5s ease-in-out";
 		element.style.transform = `translate(${heights[0]}) rotateY(360deg) translateZ(100px)`;
 
-		// Ik gebruik een timeout om de degrees weer te resetten na de transitie
+		// I use a timeout to reset the degrees after the transition
 		setTimeout(() => {
-			// Geen transitie om het smooth te maken
+			// No transition to make it smooth
 			element.style.transition = "none";
-			// Reset de degree naar 0
+			// Reset the degree to 0
 			element.style.transform = `translate(${heights[0]}) rotateY(0deg) translateZ(100px)`;
 		}, 500);
 	} else {
-		// Normale rotation
+		// Normal rotation
 		element.style.transition = "transform 0.5s ease-in-out";
 		element.style.transform = `translate(${heights[nextIndex]}) rotateY(${degrees[nextIndex]}deg) translateZ(100px)`;
 	}
 
-	// Update de index voor de volgende rotatie
+	// Update the index for the next rotation
 	elementDegreesIndex[elementKey] = nextIndex;
 
-	// Update de informatie
+	// Update the information
 	updateInformation(elementKey, degrees[nextIndex]);
 }
 
 function updateInformation(elementKey, currentDegree) {
-	// Check of de currentDegree 0 is
+	// Check if the currentDegree is 0
 	if (currentDegree === 0) {
-		// Update de background-image van .information op basis van de elementKey
+		// Update the background-image of .information based on the elementKey
 		const imageUrl = backgroundImageMapping[elementKey];
 		if (imageUrl) {
-			// Check eerst of imageUrl bestaat
+			// First check if imageUrl exists
 			information.style.backgroundImage = imageUrl;
 		}
 	}
@@ -90,7 +147,7 @@ function updateInformation(elementKey, currentDegree) {
 
 document.getElementById("nextButton").addEventListener("click", function () {
 	console.log("let's rotate");
-	// Update de rotatie voor elk element op basis vd huidige index
+	// Update rotation for each element based on the current index
 	for (const elementKey in elements) {
 		updateElementRotation(elementKey);
 	}
