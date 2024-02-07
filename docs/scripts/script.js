@@ -3,6 +3,17 @@ console.log("Hello world");
 /**======================
  *    VARIABELEN
  *========================**/
+// DIVS met info
+const information = document.querySelector(".information");
+
+const backgroundImageMapping = {
+	strengths: "url('./img/strengthsbox.jpg')",
+	bio: "url('./img/biobox.jpg')",
+	level: "url('./img/levelbox.jpg')",
+	soundtrack: "url('./img/soundtrackbox.jpg')",
+	native: "url('./img/nativetobox.jpg')",
+};
+
 // Eerst cirkels/iconen
 const bio = document.querySelector(".bio");
 const level = document.querySelector(".level");
@@ -37,10 +48,44 @@ const elements = { strengths, bio, level, soundtrack, native };
 function updateElementRotation(elementKey) {
 	const element = elements[elementKey];
 	let index = elementDegreesIndex[elementKey];
-	// Update de transform property naar het volgende graad, ga zo door de array heen
-	element.style.transform = `translate(${heights[index]}) rotateY(${degrees[index]}deg) translateZ(100px)`;
-	// Update de index voor de volgende keer, mag niet hoger dan de degrees.length
-	elementDegreesIndex[elementKey] = (index + 1) % degrees.length;
+	let nextIndex = (index + 1) % degrees.length;
+
+	// Check of het element weer naar positie 0 gaat hierna
+	if (nextIndex === 0) {
+		// Tijdelijk de degree naar 0 zetten
+		element.style.transition = "transform 0.5s ease-in-out";
+		element.style.transform = `translate(${heights[0]}) rotateY(360deg) translateZ(100px)`;
+
+		// Ik gebruik een timeout om de degrees weer te resetten na de transitie
+		setTimeout(() => {
+			// Geen transitie om het smooth te maken
+			element.style.transition = "none";
+			// Reset de degree naar 0
+			element.style.transform = `translate(${heights[0]}) rotateY(0deg) translateZ(100px)`;
+		}, 500);
+	} else {
+		// Normale rotation
+		element.style.transition = "transform 0.5s ease-in-out";
+		element.style.transform = `translate(${heights[nextIndex]}) rotateY(${degrees[nextIndex]}deg) translateZ(100px)`;
+	}
+
+	// Update de index voor de volgende rotatie
+	elementDegreesIndex[elementKey] = nextIndex;
+
+	// Update de informatie
+	updateInformation(elementKey, degrees[nextIndex]);
+}
+
+function updateInformation(elementKey, currentDegree) {
+	// Check of de currentDegree 0 is
+	if (currentDegree === 0) {
+		// Update de background-image van .information op basis van de elementKey
+		const imageUrl = backgroundImageMapping[elementKey];
+		if (imageUrl) {
+			// Check eerst of imageUrl bestaat
+			information.style.backgroundImage = imageUrl;
+		}
+	}
 }
 
 document.getElementById("nextButton").addEventListener("click", function () {

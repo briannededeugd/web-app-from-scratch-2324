@@ -16,10 +16,45 @@
 }
 
 html {
-    background-color: rgb(204, 208, 245);
+    /* background-color: rgb(204, 208, 245); */ 
+    
     font-family: "VT323", sans-serif;
 }
 
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-image: url("../img/train.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#names {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+#names > h1 {
+    background-image: url('../img/nameboard.jpeg');
+    width: max-content;
+    height: auto;
+    padding: 1em;
+    margin: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#names h2 {
+    font-size: small;
+    color: white;
+    margin: 0;
+}
 .rotation {
     margin: 0;
     height: max-content;
@@ -33,24 +68,71 @@ html {
 .avatar {
     width: 200px;
     height: 200px;
-    background-image: url("../img/avatar.png");
+    background-image: url("../img/avatar.gif");
     background-size: cover;
     border-radius: 50%;
     position: relative;
     transform-style: preserve-3d;
 }
 
-.avatar > div {
+/* ********************* */
+/* SIZING AND NAVIGATION */
+/* ********************* */
+
+.avatar > div,
+#nextButton,
+#prevButton {
     width: 50px;
     height: 50px;
     position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.avatar > div {
     top: 50%;
     left: 50%;
     transition: transform 1s ease-in-out; 
 }
 
+#nextButton {
+    background-image: url("../img/next.png");
+    border: none;
+    background-color: transparent;
+    right: 5vw;
+    bottom: 5vh;
+}
+
+#nextButton:active {
+    background-image: url("../img/darknext.png")
+}
+
+#nextButton:hover {
+    cursor: pointer !important;
+}
+
+#prevButton {
+    background-image: url("../img/prev.png");
+    border: none;
+    background-color: transparent;
+    left: 5vw;
+    bottom: 5vh;
+}
+
+#prevButton:active {
+    background-image: url("../img/darkprev.png")
+}
+
+#prevButton:hover {
+    cursor: pointer !important;
+}
+
+
+/* ********************* */
+/* AVATAR ICONS CIRCLING */
+/* ********************* */
+
+/* Bio */
 .avatar > div:nth-child(1) {
     background: url("../img/bio.png");
     background-repeat: no-repeat;
@@ -58,6 +140,7 @@ html {
     transform: translate(-50%, 100%) rotateY(0deg) translateZ(100px);
 }
 
+/* Level */
 .avatar > div:nth-child(2) {
    background: url("../img/level.png");
     background-repeat: no-repeat;
@@ -65,6 +148,7 @@ html {
    transform: translate(-50%, 50%) rotateY(72deg) translateZ(100px);
 }
 
+/* Soundtrack */
 .avatar > div:nth-child(3) {
    background: url("../img/soundtrack.png");
     background-repeat: no-repeat;
@@ -72,6 +156,7 @@ html {
    transform: translate(-50%, -50%) rotateY(144deg) translateZ(100px);
 }
 
+/* Native to */
 .avatar > div:nth-child(4) {
     background: url("../img/nativeto.png");
     background-repeat: no-repeat;
@@ -79,9 +164,26 @@ html {
     transform: translate(-50%, -50%) rotateY(216deg) translateZ(100px);
 }
 
+/* Strengths */
 .avatar > div:nth-child(5) {
     background: url("../img/strengths.png");
     background-repeat: no-repeat;
     background-size: cover;
     transform: translate(-50%, 50%) rotateY(288deg) translateZ(100px);
+}
+
+/* INFOS */
+.information {
+    background: url("../img/biobox.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-width: 270px;
+    max-width: 270px;
+    min-height: 27vh;
+    max-height: 27vh;
+    padding: .5em 2em;
+    position: absolute;
+    bottom: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
 }
