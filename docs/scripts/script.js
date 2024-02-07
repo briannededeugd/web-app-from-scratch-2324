@@ -95,3 +95,41 @@ document.getElementById("nextButton").addEventListener("click", function () {
 		updateElementRotation(elementKey);
 	}
 });
+
+function updateElementRotationBackward(elementKey) {
+	const element = elements[elementKey];
+	let index = elementDegreesIndex[elementKey];
+	let prevIndex = (index - 1 + degrees.length) % degrees.length;
+
+	// Determine the actual degrees the element should rotate to
+	let targetDegree = degrees[prevIndex];
+
+	// Handle the special case when going from 0 to the last element (e.g., 288 degrees)
+	if (index === 0 && prevIndex === degrees.length - 1) {
+		// Rotate the element to -72 degrees to make it seem like it continues from 360 to 288 degrees
+		targetDegree = -72;
+	}
+
+	element.style.transition = "transform 0.5s ease-in-out";
+	element.style.transform = `translate(${heights[prevIndex]}) rotateY(${targetDegree}deg) translateZ(100px)`;
+
+	// Reset the rotation from -72 to 288 degrees without transition to make it seamless
+	if (targetDegree === -72) {
+		setTimeout(() => {
+			element.style.transition = "none";
+			element.style.transform = `translate(${heights[prevIndex]}) rotateY(${degrees[prevIndex]}deg) translateZ(100px)`;
+		}, 500); // This should match the duration of your transition
+	}
+
+	elementDegreesIndex[elementKey] = prevIndex;
+
+	// Update the information for reverse direction
+	updateInformation(elementKey, degrees[prevIndex]);
+}
+
+document.getElementById("prevButton").addEventListener("click", function () {
+	console.log("rotating back");
+	for (const elementKey in elements) {
+		updateElementRotationBackward(elementKey);
+	}
+});
