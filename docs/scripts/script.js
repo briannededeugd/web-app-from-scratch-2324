@@ -1,51 +1,60 @@
 console.log("Hello world");
 
+/**============================================
+ *               DATA AND API
+ *=============================================**/
+// Data JSON
+let data = {};
+
+async function fetchData() {
+	const response = await fetch("./data/data.json");
+	data = await response.json();
+	console.log("THE DATA:", data);
+}
+
+fetchData();
+
+function playSound(url) {
+	const audio = new Audio(url);
+	audio
+		.play()
+		.catch((error) => console.error("Error playing the sound:", error));
+}
+
+let playsong = false;
+
+function playSong() {
+	if (playsong === false) {
+		const song = new Audio("./data/audios/tiptoe.mp3");
+		song.play();
+		playsong = true;
+	} else {
+		song.pause();
+		playsong = false;
+	}
+}
+
+// API
+const apiKey = "UGvJe4oBAcXQXhqsH80aSe7CwPk4r1cwKTrtP8Ai";
+
+// Navigation sound effect
+const navID = 106125;
+const navURL = `https://freesound.org/apiv2/sounds/${navID}/?token=${apiKey}`;
+
+// Shifting elements sound effect
+const elementsID = 391250;
+const elementsURL = `https://freesound.org/apiv2/sounds/${elementsID}/?token=${apiKey}`;
+
+// Navigation sound effect
+const likeID = 1234;
+const likeURL = `https://freesound.org/apiv2/sounds/${likeID}/?token=${apiKey}`;
+
 /**======================
  *    VARIABLES
  *========================**/
-
-// Data JSON
-const data = [
-	{
-		name: "Brianne",
-		nickname: "@bri",
-		level: 20,
-		bio: "Brianne is a third-year Communication & Multimedia Design student. She gains happiness from animals, the color green and pretty environments. Avoid insects, rush hour and long queues to keep her happy!",
-		strengths: ["Cool", "Calm", "Collected"],
-		native: [
-			{ BORN: "Alkmaar" },
-			{ LIVING: "Almere" },
-			{ "OFTEN FOUND IN": "Amsterdam" },
-		],
-		soundtrack: "../audios/dadadadada",
-		favorite_game: [
-			"The Sims",
-			"Minecraft",
-			"Super Mario Bros",
-			"Killer Sudoku",
-		],
-	},
-	{
-		name: "Elaine",
-		nickname: "@elaine",
-		age: 22,
-		bio: "Brianne is a third-year Communication & Multimedia Design student. She gains happiness from animals, the color green and pretty environments. Avoid insects, rush hour and long queues to keep her happy!",
-		strengths: ["Cool", "Calm", "Collected"],
-		native: [
-			{ BORN: "Alkmaar" },
-			{ LIVING: "Almere" },
-			{ "OFTEN FOUND IN": "Amsterdam" },
-		],
-		soundtrack: "../audios/dadadadada",
-		favorite_game: [
-			"The Sims",
-			"Minecraft",
-			"Super Mario Bros",
-			"Killer Sudoku",
-		],
-	},
-];
-console.log("THE DATA:", data);
+// Soundtrack ++ Music
+const musicPlayer = document.querySelector("#audio-player-container");
+const playButton = document.querySelector("#play-icon");
 
 // Username
 const username = document.querySelector("#username");
@@ -137,16 +146,46 @@ function updateInformation(elementKey, currentDegree) {
 	// Check if the currentDegree is 0
 	if (currentDegree === 0) {
 		// Update the background-image of .information based on the elementKey
+		const category = data[elementKey];
+		infoHeading.textContent = elementKey.toUpperCase();
+		if (Array.isArray(category)) {
+			let fullHtml = ""; // Initialize an empty string to accumulate the HTML content
+			category.forEach((livingInfo) => {
+				for (const [key, value] of Object.entries(livingInfo)) {
+					fullHtml += `${key}: ${value}<br />`; // Append each key-value pair with a line break
+				}
+			});
+			infoText.innerHTML = fullHtml; // Set the innerHTML to include line breaks
+		} else {
+			infoText.textContent = category;
+		}
+
 		const imageUrl = backgroundImageMapping[elementKey];
 		if (imageUrl) {
 			// First check if imageUrl exists
 			information.style.backgroundImage = imageUrl;
 		}
+
+		if (elementKey === "soundtrack") {
+			musicPlayer.style.display = "flex";
+			playButton.addEventListener("click", playSong());
+		} else {
+			musicPlayer.style.display = "none";
+		}
+
+		fetch(elementsURL)
+			.then((response) => response.json())
+			.then((data) => {
+				if (data && data.previews) {
+					// Use the preview URL to play the sound
+					playSound(data.previews["preview-hq-mp3"]);
+				}
+			})
+			.catch((error) => console.error("Error fetching sound data:", error));
 	}
 }
 
 document.getElementById("nextButton").addEventListener("click", function () {
-	console.log("let's rotate");
 	// Update rotation for each element based on the current index
 	for (const elementKey in elements) {
 		updateElementRotation(elementKey);
@@ -185,7 +224,6 @@ function updateElementRotationBackward(elementKey) {
 }
 
 document.getElementById("prevButton").addEventListener("click", function () {
-	console.log("rotating back");
 	for (const elementKey in elements) {
 		updateElementRotationBackward(elementKey);
 	}

@@ -1,0 +1,14 @@
+{
+	"name": "Brianne",
+	"nickname": "bri",
+	"level": 20,
+	"bio": "Brianne is a third-year Communication & Multimedia Design student. She gains happiness from animals, the color green and pretty environments. Avoid insects, rush hour and long queues to keep her happy!",
+	"strengths": "Brianne performs well under pressure.",
+	"native": [
+		{ "Born": "Alkmaar" },
+		{ "Living": "Almere" },
+		{ "Frequents": "Amsterdam" }
+	],
+	"soundtrack": "Play the official Brianne soundtrack below!",
+	"favorite_game": ["The Sims", "Minecraft", "Super Mario Bros", "Killer Sudoku"]
+}

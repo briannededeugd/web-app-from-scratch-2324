@@ -12,6 +12,7 @@ Welcome to this interactive mini-site I built for the course Webapps From Scratc
 - [Features and use](#featuresanduse)
 - [External data source](#externaldatasource)
 - [Achievements and let-go's](#achievements)
+- [Relevant feedback and process](#relevantfeedback)
 - [License](#license)
 - [Sources](#sources)
 
@@ -42,6 +43,35 @@ There you go, now you've installed the app! For a better experience, navigate to
 <a id="achievements"></a>
 
 ## Achievements and let-go's
+
+<a id="relevantfeedback"></a>
+
+## Relevant feedback & process
+I've received some great feedback during this process! Here's what my teachers and peers have had to say about improving my app.
+1. The next and previous buttons as well as the names on the top should be easier to read / more obvious, so that they don't blend into the background too much and so that it's clear to the user that they can interact with the elements. Suggestion: perhaps add a 'light' around them, like a luminent glow that pixel games have sometimes. - Vasilis, February 8th<br/>
+Current state:<br />
+
+<img src="./docs/readme-img/oldbuttons.png" width="300px">
+
+New state: <br />
+2.  The data of the 'Native' category can get pretty complex, because it's an array of objects of which I want the property key as well as the value in my frontend, but I only have one paragraph to fill. My issue was that the data was loading, but it only displayed the last object in the Native array. I fixed this by ... <br />
+
+The issue and the code: <br/>
+<img src="./docs/readme-img/oldnative.png" width="300px">
+
+```js
+const category = data[elementKey];
+if (Array.isArray(category)) {
+	console.log(category, "is an array");
+	category.forEach((livingInfo) => {
+		for (const [key, value] of Object.entries(livingInfo)) {
+			console.log(`${key}: ${value}`);
+			infoText.textContent = `${key}: ${value}`;
+		}
+	});
+	infoHeading.textContent = elementKey;
+}
+```
 
 <!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
 <a id="license"></a>
