@@ -34,21 +34,92 @@ There you go, now you've installed the app! For a better experience, navigate to
 
 ## Features and use
 
-<!-- What external data source is featured in your project and what are its properties 🌠 -->
-<a id="externaldatasource"></a>
-
-## External data source
-
-<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
-<a id="achievements"></a>
-
-## Achievements and let-go's
-
-<a id="process"></a>
-
 ## Process
 I've received some great feedback during this process! Here's my process, including what my teachers and peers have had to say about improving my app.
-1. EDIT: BACKGROUND, BUTTERFLY PNG TO SHOW 3D ATTEMPT
+1. To start out, I wrote simple HTML to position all elements and drew some containers and icons in Procreate. I wanted to go for a pixelated, 8-bit videogame style, because our theme as a team was videogames. The first thing I focused on was the 3D-element I was planning to implement. Various online sources on 3D CSS taught me the semantics of containers and elements needed to achieve the effect I was going for. My HTML is quite simple:
+
+```html
+<section class="rotation">
+	<section class="avatar">
+		<!-- BIOGRAPHY -->
+		<div class="bio"></div>
+
+		<!-- LEEFTIJD/LEVEL -->
+		<div class="level"></div>
+
+		<!-- SOUNDTRACK -->
+		<div class="soundtrack"></div>
+
+		<!-- NATIVE (TO) -->
+		<div class="native"></div>
+
+		<!-- STRENGTHS -->
+		<div class="strengths"></div>
+	</section>
+</section>
+```
+
+Next, I applied the necessary CSS. Because I wanted my elements/categories to 'revolve' around me, I used a placeholder of a butterfly as its background image.
+
+```css
+.rotation {
+    margin: 0;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 800px; /* Adjust the perspective for the 3D effect */
+    perspective-origin: center;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    background-image: url("../img/butterfly.png");
+
+    background-size: cover;
+    border-radius: 50%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.avatar > div {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.avatar > div {
+    top: 50%;
+    left: 50%;
+    transition: transform 1s ease-in-out; 
+}
+
+/* Bio */
+.avatar > div:nth-child(1) {
+    background: url("../img/bio.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: translate(-50%, 100%) rotateY(0deg) translateZ(100px);
+}
+
+/* Level */
+.avatar > div:nth-child(2) {
+   background: url("../img/level.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+   transform: translate(-50%, 50%) rotateY(72deg) translateZ(100px);
+}
+
+/* ETC... */
+```
+
+It did seem a little strange that I had to keep adding `.avatar > div:nth-of-type(xx) {}` to apply the same styling multiple times, instead of defining the style once at `.avatar > div`, but unfortunately doing so didn't work. But the good news: the 3D-placing worked!
+
+<img src="./docs/readme-img/3dworking.png" width="300px">
+
 2. EDIT: BACKGROUND TRIES
 3. EDIT: AVATAR.PNG AS STILL TO AVATAR.GIF AS GIF
 4. EDIT: LOAD INFO ERROR, USE LIVE SERVER, SHOW DATA
@@ -96,6 +167,18 @@ if (Array.isArray(category)) {
 ```
 5. AUDIO CUSTOM SLIDER PLAYER ETC
 6. LEVEL YAYAYAY
+
+<!-- What external data source is featured in your project and what are its properties 🌠 -->
+<a id="externaldatasource"></a>
+
+## External data source
+
+<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
+<a id="achievements"></a>
+
+## Achievements and let-go's
+
+<a id="process"></a>
 
 <!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
 <a id="license"></a>
