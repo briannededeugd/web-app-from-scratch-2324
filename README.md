@@ -126,24 +126,159 @@ It did seem a little strange that I had to keep adding `.avatar > div:nth-of-typ
 But the winner was a cute train station scenery in the rain:<br/>
 <img src="./docs/readme-img/train.png" width="200px">
 
-3. Next, I wanted to have my own head as the avatar, or rather a pixelated avatar of myself. I was a bit hesitant to fully draw my own avatar, also because of how much effort it would take, but luckily I know of a website where you can easily create your own avatar: picrew. All it took was finding a 'pixel avatar maker'. Unfortunately, most avatar makers were only including straight hair and light skin, so I've had to settle for an avatar maker that offered braids and brown skin but no face customization. Regardless, I think she's cute! I made my avatar with [this picrew]() and saved it as a png, so that the 3D-elements circling it would feel more natural:
+3. Next, I wanted to have my own head as the avatar, or rather a pixelated avatar of myself. I was a bit hesitant to fully draw my own avatar, also because of how much effort it would take, but luckily I know of a website where you can easily create your own avatar: picrew. All it took was finding a 'pixel avatar maker'. Unfortunately, most avatar makers were only including straight hair and light skin, so I've had to settle for an avatar maker that offered braids and brown skin but no face customization. Regardless, I think she's cute! I made my avatar with [this picrew](https://picrew.to/6ed/image_maker/pixbabe_x0) and saved it as a png, so that the 3D-elements circling it would feel more natural:
 
 <img src="./docs/readme-img/staticavatar.png" width="200px">
 
-However, I quickly noticed that a static image seemed a bit boring and wanted to add a small motion. I considered adding a wink, making her blink, or having hearts float around her face, but eventually decided on a simple gif: she smiles, stops smiling, and then puckers her lips, on a loop!
-
-<img src="./docs/readme-img/gifavatar.gif" width="200px">
-
+However, I quickly noticed that a static image seemed a bit boring and wanted to add a small motion. I considered adding a wink, making her blink, or having hearts float around her face, but eventually decided on a simple gif: she smiles, stops smiling, and then puckers her lips, on a loop! Which you can see in the [live version of the site](https://briannededeugd.github.io/web-app-from-scratch-2324/)
 
 4. EDIT: LOAD INFO ERROR, USE LIVE SERVER, SHOW DATA
-5. OTHER BUTTONS (NEXT, PREV, NAME)
-6. The next and previous buttons as well as the names on the top should be easier to read / more obvious, so that they don't blend into the background too much and so that it's clear to the user that they can interact with the elements. Suggestion: perhaps add a 'light' around them, like a luminent glow that pixel games have sometimes. - Vasilis, February 8th<br/>
-Current state:<br />
+The logical next step was to create and load the right data. For this, I had made a bunch of containers that were each linked (or would be linked in the future) to the correct element. The goal was that if a floating element was at the front of the avatar, its corresponding information(-container) would appear in the front.
+
+However, having multiple containers for this seemed a bit much, and wasn't all that convenient considering the fact that I was able to dynamically load data - and I would be doing that, anyway, if I fetched my data from a JSON file.
+
+So I made only one container, with a header, a text content and some invisible addons (like a music player for the Soundtrack element and a sort of progressbar for the Level element).
+
+```html
+<section class="information">
+			<h3 id="infoname">BIO</h3>
+			<p id="infotext">
+				Brianne is a third-year Communication & Multimedia Design student. She
+				gains happiness from animals, the color green and pretty environments.
+				Avoid insects, rush hour and long queues to keep her happy!
+			</p>
+
+			<div id="leveldisplay" style="display: none">
+				<span id="prevlevel"></span>
+				<div id="levelcontainer">
+					<div id="levelindicator"></div>
+				</div>
+				<span id="nextlevel"></span>
+			</div>
+
+			<div id="audio-player-container" style="display: none">
+				<span id="songtitle">wave to earth - seasons</span>
+				<div id="player">
+					<button id="play-icon">
+						<img src="./img/playbutton.png" alt="Play control" />
+					</button>
+					<span id="current-time" class="time">0:00</span>
+					<input type="range" id="seek-slider" max="100" value="0" />
+					<span id="duration" class="time">0:00</span>
+				</div>
+			</div>
+		</section>
+```
+
+The default text is set to the bio information, as that's the first element in rotation, and it updates when a user navigates by clicking the 'Next' or 'Prev' button.
+
+To achieve this functionality, I did a few things: 
+- Created a data.json file;
+- Created an updateInformation function that was called inside of the updateRotation function;
+- Called on the right information from my data.json-file;
+- Loaded the data in place of the header and text content;
+
+There were a few issues I ran into, including the handling of the different data types (see number 6 in this list), but before all that, I ran into a problem: the data.json couldn't be fetched.
+
+I was told that this was because I was working in my files and not on a server. Installing a Live Preview extension and running the application on a localhost resolved the issue.
+
+Once I could fetch data, I filled my JSON-file:
+```json
+{
+	"name": "Brianne",
+	"nickname": "bri",
+	"level": 20,
+	"bio": "Brianne is a third-year Communication & Multimedia Design student. She gains happiness from animals, the color green and pretty environments. Avoid insects, rush hour and long queues to keep her happy!",
+	"strengths": "Brianne performs well under pressure.",
+	"native": [
+		{ "Born": "Alkmaar" },
+		{ "Living": "Almere" },
+		{ "Frequents": "Amsterdam" }
+	],
+	"soundtrack": "Play the official Brianne soundtrack below!",
+	"favorite_game": ["The Sims", "Minecraft", "Super Mario Bros", "Killer Sudoku"]
+}
+```
+
+Then, I fetched it:
+```js
+let data = {};
+
+async function fetchData() {
+	const response = await fetch("./data/data.json");
+	data = await response.json();
+	console.log("THE DATA:", data);
+}
+
+fetchData();
+```
+
+And then, I could work with it!
+```js
+function updateInformation(elementKey, currentDegree) {
+	// Check if the currentDegree is 0
+	if (currentDegree === 0) {
+		// Update the background-image of .information based on the elementKey
+		const category = data[elementKey];
+		infoHeading.textContent = elementKey.toUpperCase();
+		if (Array.isArray(category)) {
+			let fullHtml = ""; // Initialize an empty string to accumulate the HTML content
+			category.forEach((livingInfo) => {
+				for (const [key, value] of Object.entries(livingInfo)) {
+					fullHtml += `${key}: ${value}<br />`; // Append each key-value pair with a line break
+				}
+			});
+			infoText.innerHTML = fullHtml; // Set the innerHTML to include line breaks
+		} else {
+			infoText.textContent = category;
+		}
+
+		const imageUrl = backgroundImageMapping[elementKey];
+		if (imageUrl) {
+			// First check if imageUrl exists
+			information.style.backgroundImage = imageUrl;
+		}
+
+		if (elementKey === "soundtrack") {
+			musicPlayer.style.display = "block";
+			playButton.addEventListener("click", function () {
+				playSong();
+			});
+		} else {
+			musicPlayer.style.display = "none";
+		}
+
+		if (elementKey === "level") {
+			levelDisplay.style.display = "flex";
+			prevLevel.textContent = category;
+			nextLevel.textContent = `${category + 1}`;
+			infoText.textContent = `Brianne is currently at level ${category}!`;
+		} else {
+			levelDisplay.style.display = "none";
+		}
+
+		fetch(elementsURL)
+			.then((response) => response.json())
+			.then((data) => {
+				if (data && data.previews) {
+					// Use the preview URL to play the sound
+					playSound(data.previews["preview-hq-mp3"]);
+				}
+			})
+			.catch((error) => console.error("Error fetching sound data:", error));
+	}
+}
+```
+
+5. I'd already made some quick navigation buttons in the process, but when I spoke to Vasilis on February 8th, he remarked that the "next" and "previous" buttons as well as the name plaque on the top should be easier to read / more obvious, so that they don't blend into the background too much and so that it's clear to the user that they can interact with the elements. He suggested I add a 'light' around them, like a luminent glow that pixel games have sometimes. Before implementing his feedback, the buttons looked like this:<br />
 
 <img src="./docs/readme-img/oldbuttons.png" width="300px">
 
-New state: <br />
-4.  The data of the 'Native' category can get pretty complex, because it's an array of objects of which I want the property key as well as the value in my frontend, but I only have one paragraph to fill. My issue was that the data was loading, but it only displayed the last object in the Native array. I fixed this by adding an empty string to accumulate the HTML content, so that each collected object could get added to the frontend, and the different objects got added up, rather than being replaced by each other. <br />
+And after, they looked like this: <br />
+
+Much better!
+
+6.  The data of the 'Native' category can get pretty complex, because it's an array of objects of which I want the property key as well as the value in my frontend, but I only have one paragraph to fill. My issue was that the data was loading, but it only displayed the last object in the Native array. I fixed this by adding an empty string to accumulate the HTML content, so that each collected object could get added to the frontend, and the different objects got added up, rather than being replaced by each other. <br />
 
 The issue and the code: <br/>
 <img src="./docs/readme-img/oldnative.png" width="300px">
@@ -180,6 +315,7 @@ if (Array.isArray(category)) {
 ```
 5. AUDIO CUSTOM SLIDER PLAYER ETC
 6. LEVEL YAYAYAY
+7. EXTERNAL API
 
 <!-- What external data source is featured in your project and what are its properties 🌠 -->
 <a id="externaldatasource"></a>
