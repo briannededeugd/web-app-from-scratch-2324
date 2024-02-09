@@ -123,7 +123,7 @@ It did seem a little strange that I had to keep adding `.avatar > div:nth-of-typ
 2. To really lean into the pixel game style, I ventured to find a background image online of pixel art that fit my vision but wasn't overbearing. There were a few options: <br />
 <img src="./docs/readme-img/windmill.png" width="200px"><img src="./docs/readme-img/bedroom.png" width="200px"><img src="./docs/readme-img/road.png" width="200px"><img src="./docs/readme-img/retrocity.png" width="200px"><img src="./docs/readme-img/forestpath.png" width="200px">
 
-But the winner was a cute train station scenery in the rain:
+But the winner was a cute train station scenery in the rain:<br/>
 <img src="./docs/readme-img/train.png" width="200px">
 
 3. Next, I wanted to have my own head as the avatar, or rather a pixelated avatar of myself. I was a bit hesitant to fully draw my own avatar, also because of how much effort it would take, but luckily I know of a website where you can easily create your own avatar: picrew. All it took was finding a 'pixel avatar maker'. Unfortunately, most avatar makers were only including straight hair and light skin, so I've had to settle for an avatar maker that offered braids and brown skin but no face customization. Regardless, I think she's cute! I made my avatar with [this picrew]() and saved it as a png, so that the 3D-elements circling it would feel more natural:
@@ -132,7 +132,7 @@ But the winner was a cute train station scenery in the rain:
 
 However, I quickly noticed that a static image seemed a bit boring and wanted to add a small motion. I considered adding a wink, making her blink, or having hearts float around her face, but eventually decided on a simple gif: she smiles, stops smiling, and then puckers her lips, on a loop!
 
-<img src="./docs/readme-img/gifavatar.png" width="200px">
+<img src="./docs/readme-img/gifavatar.gif" width="200px">
 
 
 4. EDIT: LOAD INFO ERROR, USE LIVE SERVER, SHOW DATA
