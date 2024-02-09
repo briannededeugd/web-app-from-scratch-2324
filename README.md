@@ -12,7 +12,7 @@ Welcome to this interactive mini-site I built for the course Webapps From Scratc
 - [Features and use](#featuresanduse)
 - [External data source](#externaldatasource)
 - [Achievements and let-go's](#achievements)
-- [Relevant feedback and process](#relevantfeedback)
+- [Process](#process)
 - [License](#license)
 - [Sources](#sources)
 
@@ -44,17 +44,22 @@ There you go, now you've installed the app! For a better experience, navigate to
 
 ## Achievements and let-go's
 
-<a id="relevantfeedback"></a>
+<a id="process"></a>
 
-## Relevant feedback & process
-I've received some great feedback during this process! Here's what my teachers and peers have had to say about improving my app.
-1. The next and previous buttons as well as the names on the top should be easier to read / more obvious, so that they don't blend into the background too much and so that it's clear to the user that they can interact with the elements. Suggestion: perhaps add a 'light' around them, like a luminent glow that pixel games have sometimes. - Vasilis, February 8th<br/>
+## Process
+I've received some great feedback during this process! Here's my process, including what my teachers and peers have had to say about improving my app.
+1. EDIT: BACKGROUND, BUTTERFLY PNG TO SHOW 3D ATTEMPT
+2. EDIT: BACKGROUND TRIES
+3. EDIT: AVATAR.PNG AS STILL TO AVATAR.GIF AS GIF
+4. EDIT: LOAD INFO ERROR, USE LIVE SERVER, SHOW DATA
+5. OTHER BUTTONS (NEXT, PREV, NAME)
+6. The next and previous buttons as well as the names on the top should be easier to read / more obvious, so that they don't blend into the background too much and so that it's clear to the user that they can interact with the elements. Suggestion: perhaps add a 'light' around them, like a luminent glow that pixel games have sometimes. - Vasilis, February 8th<br/>
 Current state:<br />
 
 <img src="./docs/readme-img/oldbuttons.png" width="300px">
 
 New state: <br />
-2.  The data of the 'Native' category can get pretty complex, because it's an array of objects of which I want the property key as well as the value in my frontend, but I only have one paragraph to fill. My issue was that the data was loading, but it only displayed the last object in the Native array. I fixed this by ... <br />
+4.  The data of the 'Native' category can get pretty complex, because it's an array of objects of which I want the property key as well as the value in my frontend, but I only have one paragraph to fill. My issue was that the data was loading, but it only displayed the last object in the Native array. I fixed this by adding an empty string to accumulate the HTML content, so that each collected object could get added to the frontend, and the different objects got added up, rather than being replaced by each other. <br />
 
 The issue and the code: <br/>
 <img src="./docs/readme-img/oldnative.png" width="300px">
@@ -72,6 +77,25 @@ if (Array.isArray(category)) {
 	infoHeading.textContent = elementKey;
 }
 ```
+
+The fix and its code: </br>
+<img src="./docs/readme-img/newnative.png" width="300px">
+
+```js
+if (Array.isArray(category)) {
+			let fullHtml = ""; // Initialize an empty string to accumulate the HTML content
+			category.forEach((livingInfo) => {
+				for (const [key, value] of Object.entries(livingInfo)) {
+					fullHtml += `${key}: ${value}<br />`; // Append each key-value pair with a line break
+				}
+			});
+			infoText.innerHTML = fullHtml; // Set the innerHTML to include line breaks
+		} else {
+			infoText.textContent = category;
+		}
+```
+5. AUDIO CUSTOM SLIDER PLAYER ETC
+6. LEVEL YAYAYAY
 
 <!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
 <a id="license"></a>
