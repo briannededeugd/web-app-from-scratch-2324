@@ -22,14 +22,88 @@ function playSound(url) {
 }
 
 let playsong = false;
+const song = new Audio("./data/audios/seasons.mp3");
+const durationContainer = document.querySelector("#duration");
+const songButton = document.querySelector("#play-icon img");
 
+song.addEventListener("loadedmetadata", () => {
+	displayDuration();
+});
+
+const calculateTime = (secs) => {
+	const minutes = Math.floor(secs / 60);
+	const seconds = Math.floor(secs % 60);
+	const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+	return `${minutes}:${returnedSeconds}`;
+};
+
+const displayDuration = () => {
+	durationContainer.textContent = calculateTime(song.duration);
+};
+
+if (song.readyState > 0) {
+	displayDuration();
+} else {
+	song.addEventListener("loadedmetadata", () => {
+		displayDuration();
+	});
+}
+
+// Seek slider (song progression)
+const seekSlider = document.getElementById("seek-slider");
+
+// when the slider changes, the song should change with it
+seekSlider.addEventListener("change", () => {
+	song.currentTime = seekSlider.value;
+});
+
+// the max of the slider is the max of the song
+const setSliderMax = () => {
+	seekSlider.max = Math.floor(song.duration);
+};
+
+// readyState is a built-in JS thing that checks whether an audio is loaded/ready to be played
+if (song.readyState > 0) {
+	displayDuration();
+	setSliderMax();
+} else {
+	// if not loaded yet, wait for it to be loaded
+	song.addEventListener("loadedmetadata", () => {
+		displayDuration();
+		setSliderMax();
+	});
+}
+
+const currentTimeContainer = document.getElementById("current-time");
+
+// when the user changes the slider input, the time changes
+seekSlider.addEventListener("input", () => {
+	currentTimeContainer.textContent = calculateTime(seekSlider.value);
+});
+
+// upon change, the currentTime changes as well
+seekSlider.addEventListener("change", () => {
+	song.currentTime = seekSlider.value;
+	if (song.currentTime === seekSlider.max) {
+		songButton.src = "url(./img/startoverbutton.png)";
+	}
+});
+
+// and its text also
+song.addEventListener("timeupdate", () => {
+	seekSlider.value = Math.floor(song.currentTime);
+	currentTimeContainer.textContent = calculateTime(seekSlider.value);
+});
+
+// Play the song
 function playSong() {
 	if (playsong === false) {
-		const song = new Audio("./data/audios/tiptoe.mp3");
 		song.play();
+		songButton.src = "./img/pausebutton.png";
 		playsong = true;
 	} else {
 		song.pause();
+		songButton.src = "./img/playbutton.png";
 		playsong = false;
 	}
 }
@@ -167,8 +241,10 @@ function updateInformation(elementKey, currentDegree) {
 		}
 
 		if (elementKey === "soundtrack") {
-			musicPlayer.style.display = "flex";
-			playButton.addEventListener("click", playSong());
+			musicPlayer.style.display = "block";
+			playButton.addEventListener("click", function () {
+				playSong();
+			});
 		} else {
 			musicPlayer.style.display = "none";
 		}
