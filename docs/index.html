@@ -8,6 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<title>Web App From Scratch 23-24</title>
 		<link rel="stylesheet" href="./styles/style.css" />
+		<link rel="shortcut icon" href="./img/favicon.ico" />
 	</head>
 	<body>
 		<section id="names">
@@ -42,8 +43,11 @@
 				Avoid insects, rush hour and long queues to keep her happy!
 			</p>
 			<div id="audio-player-container" style="display: none">
-				<button id="play-icon"></button>
-				<div id='"player'>
+				<span id="songtitle">wave to earth - seasons</span>
+				<div id="player">
+					<button id="play-icon">
+						<img src="./img/playbutton.png" alt="Play control" />
+					</button>
 					<span id="current-time" class="time">0:00</span>
 					<input type="range" id="seek-slider" max="100" value="0" />
 					<span id="duration" class="time">0:00</span>
