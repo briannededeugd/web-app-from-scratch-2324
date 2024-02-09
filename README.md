@@ -116,11 +116,20 @@ Next, I applied the necessary CSS. Because I wanted my elements/categories to 'r
 /* ETC... */
 ```
 
-It did seem a little strange that I had to keep adding `.avatar > div:nth-of-type(xx) {}` to apply the same styling multiple times, instead of defining the style once at `.avatar > div`, but unfortunately doing so didn't work. But the good news: the 3D-placing worked!
+It did seem a little strange that I had to keep adding `.avatar > div:nth-of-type(xx) {}` to apply the same styling multiple times, instead of defining the style once at `.avatar > div`, but unfortunately doing so didn't work. But the good news: the 3D-placing worked!<br />
 
 <img src="./docs/readme-img/3dworking.png" width="300px">
 
-2. EDIT: BACKGROUND TRIES
+2. To really lean into the pixel game style, I ventured to find a background image online of pixel art that fit my vision but wasn't overbearing. There were a few options: <br />
+<img src="./docs/readme-img/windmill.png" width="200px">
+<img src="./docs/readme-img/bedroom.png" width="200px">
+<img src="./docs/readme-img/road.png" width="200px">
+<img src="./docs/readme-img/retrocity.png" width="200px">
+<img src="./docs/readme-img/forestpath.png" width="200px">
+
+But the winner was a cute train station scenery in the rain:
+<img src="./docs/readme-img/train.png" width="200px">
+
 3. EDIT: AVATAR.PNG AS STILL TO AVATAR.GIF AS GIF
 4. EDIT: LOAD INFO ERROR, USE LIVE SERVER, SHOW DATA
 5. OTHER BUTTONS (NEXT, PREV, NAME)
