@@ -121,16 +121,20 @@ It did seem a little strange that I had to keep adding `.avatar > div:nth-of-typ
 <img src="./docs/readme-img/3dworking.png" width="300px">
 
 2. To really lean into the pixel game style, I ventured to find a background image online of pixel art that fit my vision but wasn't overbearing. There were a few options: <br />
-<img src="./docs/readme-img/windmill.png" width="200px">
-<img src="./docs/readme-img/bedroom.png" width="200px">
-<img src="./docs/readme-img/road.png" width="200px">
-<img src="./docs/readme-img/retrocity.png" width="200px">
-<img src="./docs/readme-img/forestpath.png" width="200px">
+<img src="./docs/readme-img/windmill.png" width="200px"><img src="./docs/readme-img/bedroom.png" width="200px"><img src="./docs/readme-img/road.png" width="200px"><img src="./docs/readme-img/retrocity.png" width="200px"><img src="./docs/readme-img/forestpath.png" width="200px">
 
 But the winner was a cute train station scenery in the rain:
 <img src="./docs/readme-img/train.png" width="200px">
 
-3. EDIT: AVATAR.PNG AS STILL TO AVATAR.GIF AS GIF
+3. Next, I wanted to have my own head as the avatar, or rather a pixelated avatar of myself. I was a bit hesitant to fully draw my own avatar, also because of how much effort it would take, but luckily I know of a website where you can easily create your own avatar: picrew. All it took was finding a 'pixel avatar maker'. Unfortunately, most avatar makers were only including straight hair and light skin, so I've had to settle for an avatar maker that offered braids and brown skin but no face customization. Regardless, I think she's cute! I made my avatar with [this picrew]() and saved it as a png, so that the 3D-elements circling it would feel more natural:
+
+<img src="./docs/readme-img/staticavatar.png" width="200px">
+
+However, I quickly noticed that a static image seemed a bit boring and wanted to add a small motion. I considered adding a wink, making her blink, or having hearts float around her face, but eventually decided on a simple gif: she smiles, stops smiling, and then puckers her lips, on a loop!
+
+<img src="./docs/readme-img/gifavatar.png" width="200px">
+
+
 4. EDIT: LOAD INFO ERROR, USE LIVE SERVER, SHOW DATA
 5. OTHER BUTTONS (NEXT, PREV, NAME)
 6. The next and previous buttons as well as the names on the top should be easier to read / more obvious, so that they don't blend into the background too much and so that it's clear to the user that they can interact with the elements. Suggestion: perhaps add a 'light' around them, like a luminent glow that pixel games have sometimes. - Vasilis, February 8th<br/>
