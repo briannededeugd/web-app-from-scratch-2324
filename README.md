@@ -118,7 +118,7 @@ Next, I applied the necessary CSS. Because I wanted my elements/categories to 'r
 
 It did seem a little strange that I had to keep adding `.avatar > div:nth-of-type(xx) {}` to apply the same styling multiple times, instead of defining the style once at `.avatar > div`, but unfortunately doing so didn't work. But the good news: the 3D-placing worked!<br />
 
-<img src="./docs/readme-img/3dworking.png" width="300px">
+<img src="./docs/readme-img/3dworking.png" width="100px">
 
 2. To really lean into the pixel game style, I ventured to find a background image online of pixel art that fit my vision but wasn't overbearing. There were a few options: <br />
 <img src="./docs/readme-img/windmill.png" width="200px"><img src="./docs/readme-img/bedroom.png" width="200px"><img src="./docs/readme-img/road.png" width="200px"><img src="./docs/readme-img/retrocity.png" width="200px"><img src="./docs/readme-img/forestpath.png" width="200px">
@@ -132,8 +132,7 @@ But the winner was a cute train station scenery in the rain:<br/>
 
 However, I quickly noticed that a static image seemed a bit boring and wanted to add a small motion. I considered adding a wink, making her blink, or having hearts float around her face, but eventually decided on a simple gif: she smiles, stops smiling, and then puckers her lips, on a loop! Which you can see in the [live version of the site](https://briannededeugd.github.io/web-app-from-scratch-2324/)
 
-4. EDIT: LOAD INFO ERROR, USE LIVE SERVER, SHOW DATA
-The logical next step was to create and load the right data. For this, I had made a bunch of containers that were each linked (or would be linked in the future) to the correct element. The goal was that if a floating element was at the front of the avatar, its corresponding information(-container) would appear in the front.
+4. The logical next step was to create and load the right data. For this, I had made a bunch of containers that were each linked (or would be linked in the future) to the correct element. The goal was that if a floating element was at the front of the avatar, its corresponding information(-container) would appear in the front.
 
 However, having multiple containers for this seemed a bit much, and wasn't all that convenient considering the fact that I was able to dynamically load data - and I would be doing that, anyway, if I fetched my data from a JSON file.
 
@@ -272,7 +271,7 @@ function updateInformation(elementKey, currentDegree) {
 
 5. I'd already made some quick navigation buttons in the process, but when I spoke to Vasilis on February 8th, he remarked that the "next" and "previous" buttons as well as the name plaque on the top should be easier to read / more obvious, so that they don't blend into the background too much and so that it's clear to the user that they can interact with the elements. He suggested I add a 'light' around them, like a luminent glow that pixel games have sometimes. Before implementing his feedback, the buttons looked like this:<br />
 
-<img src="./docs/readme-img/oldbuttons.png" width="300px">
+<img src="./docs/readme-img/oldbuttons.png" width="100px">
 
 And after, they looked like this: <br />
 
@@ -281,7 +280,7 @@ Much better!
 6.  The data of the 'Native' category can get pretty complex, because it's an array of objects of which I want the property key as well as the value in my frontend, but I only have one paragraph to fill. My issue was that the data was loading, but it only displayed the last object in the Native array. I fixed this by adding an empty string to accumulate the HTML content, so that each collected object could get added to the frontend, and the different objects got added up, rather than being replaced by each other. <br />
 
 The issue and the code: <br/>
-<img src="./docs/readme-img/oldnative.png" width="300px">
+<img src="./docs/readme-img/oldnative.png" width="100px">
 
 ```js
 const category = data[elementKey];
@@ -298,7 +297,7 @@ if (Array.isArray(category)) {
 ```
 
 The fix and its code: </br>
-<img src="./docs/readme-img/newnative.png" width="300px">
+<img src="./docs/readme-img/newnative.png" width="100px">
 
 ```js
 if (Array.isArray(category)) {

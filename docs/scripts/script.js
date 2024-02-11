@@ -5,6 +5,9 @@ console.log("Hello world");
  *=============================================**/
 // Data JSON
 let data = {};
+const levelDisplay = document.querySelector("#leveldisplay");
+const prevLevel = document.querySelector("#prevlevel");
+const nextLevel = document.querySelector("#nextlevel");
 
 async function fetchData() {
 	const response = await fetch("./data/data.json");
@@ -97,15 +100,15 @@ song.addEventListener("timeupdate", () => {
 
 // Play the song
 function playSong() {
-	if (playsong === false) {
-		song.play();
-		songButton.src = "./img/pausebutton.png";
-		playsong = true;
-	} else {
-		song.pause();
-		songButton.src = "./img/playbutton.png";
-		playsong = false;
-	}
+	playsong = true;
+	song.play();
+	songButton.src = "./img/pausebutton.png";
+}
+
+function pauseSong() {
+	playsong = false;
+	song.pause();
+	songButton.src = "./img/playbutton.png";
 }
 
 // API
@@ -129,6 +132,14 @@ const likeURL = `https://freesound.org/apiv2/sounds/${likeID}/?token=${apiKey}`;
 // Soundtrack ++ Music
 const musicPlayer = document.querySelector("#audio-player-container");
 const playButton = document.querySelector("#play-icon");
+
+playButton.addEventListener("click", function () {
+	if (playsong === false) {
+		playSong();
+	} else {
+		pauseSong();
+	}
+});
 
 // Username
 const username = document.querySelector("#username");
@@ -223,13 +234,26 @@ function updateInformation(elementKey, currentDegree) {
 		const category = data[elementKey];
 		infoHeading.textContent = elementKey.toUpperCase();
 		if (Array.isArray(category)) {
-			let fullHtml = ""; // Initialize an empty string to accumulate the HTML content
-			category.forEach((livingInfo) => {
-				for (const [key, value] of Object.entries(livingInfo)) {
-					fullHtml += `${key}: ${value}<br />`; // Append each key-value pair with a line break
-				}
-			});
-			infoText.innerHTML = fullHtml; // Set the innerHTML to include line breaks
+			if (elementKey === "native") {
+				let fullHtml = ""; // Initialize an empty string to accumulate the HTML content
+				category.forEach((livingInfo) => {
+					for (const [key, value] of Object.entries(livingInfo)) {
+						fullHtml += `${key}: ${value}<br />`; // Append each key-value pair with a line break
+					}
+				});
+				infoText.innerHTML = fullHtml; // Set the innerHTML to include line breaks
+			} else if (elementKey === "strengths") {
+				// Start with an empty unordered list
+				let listHtml = '<ul class="strength-bullet">';
+				// Loop through each strength and add it as a list item
+				category.forEach(function (strength) {
+					listHtml += `<li>${strength}</li>`;
+				});
+				// Close the unordered list
+				listHtml += "</ul>";
+				// Set the innerHTML of infoText to the newly created list
+				infoText.innerHTML = listHtml;
+			}
 		} else {
 			infoText.textContent = category;
 		}
@@ -242,11 +266,19 @@ function updateInformation(elementKey, currentDegree) {
 
 		if (elementKey === "soundtrack") {
 			musicPlayer.style.display = "block";
-			playButton.addEventListener("click", function () {
-				playSong();
-			});
 		} else {
 			musicPlayer.style.display = "none";
+		}
+
+		if (elementKey === "level") {
+			levelDisplay.style.display = "flex";
+			prevLevel.textContent = category;
+			nextLevel.textContent = `${category + 1}`;
+			infoText.textContent = `Brianne is very close to level ${
+				category + 1
+			}! Her date of upgrade is February 24th. Keep your eye on her status to catch the upgrade live!`;
+		} else {
+			levelDisplay.style.display = "none";
 		}
 
 		fetch(elementsURL)

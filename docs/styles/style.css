@@ -70,6 +70,7 @@ body {
     width: 200px;
     height: 200px;
     background-image: url("../img/avatar.gif");
+
     background-size: cover;
     border-radius: 50%;
     position: relative;
@@ -79,7 +80,9 @@ body {
 /* ********************* */
 /* SIZING AND NAVIGATION */
 /* ********************* */
-
+button {
+    cursor: pointer;
+}
 .avatar > div,
 #nextButton,
 #prevButton {
@@ -272,4 +275,60 @@ input[type="range"]::-moz-range-track {
   height: 5px;
   background: url("../img/slider.jpeg");
   border-radius: 16px;
+}
+
+/* **************** */
+/*  LEVEL INDICATOR */
+/* **************** */
+
+#leveldisplay {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+#prevlevel,
+#nextlevel {
+    height: 15px;
+    width: 15px;
+    padding: .25em;
+    color: rgb(42, 49, 59);
+    background: url("../img/levelnumberbox.png") ;
+    background-size: cover;
+    text-align: center;
+}
+
+#levelcontainer {
+    height: 10px;
+    border-radius: 15px;
+    background-color: #2c5766;
+    width: 50cqw;
+}
+
+#levelindicator {
+    position: relative;
+    height: 10px;
+    border-radius: 15px;
+    background-color: #1c272b;
+    width: 90%;
+}
+
+#levelindicator::after {
+    content: '';
+    display: block;
+    background-image: url("../img/avatar.png");
+    background-size: cover;
+    border-radius: 16px;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    right: -5vw;
+    bottom: -1.15vh;
+}
+
+/* STRENGTHS */
+
+.strength-bullet {
+    list-style-type: square;
+    padding: 0 0 0 1em;
 }
