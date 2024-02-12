@@ -1,4 +1,13 @@
 {
+	"firstName": "Brianne",
+	"lastName": "de Deugd",
+	"avatar_url": "https://i.pinimg.com/736x/81/d3/ef/81d3efb1e429a948f33362d312e4ce4a.jpg",
+    "age": 20,
+    "city": "Almere",
+    "hobbies" : ["Watching foreign series", "Curating playlists", "Blogging", "Gaming"],
+    "truthsAndLies" : ["I have four siblings", "I lived in Asia for three months in 2023", "My bus to school once crashed into a road work machine"],
+    "favouriteAnimal" : "Elephants",
+
 	"name": "Brianne",
 	"nickname": "bri",
 	"level": 20,

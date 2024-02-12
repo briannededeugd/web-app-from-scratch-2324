@@ -34,6 +34,8 @@ There you go, now you've installed the app! For a better experience, navigate to
 
 ## Features and use
 
+<a id="process"></a>
+
 ## Process
 I've received some great feedback during this process! Here's my process, including what my teachers and peers have had to say about improving my app.
 1. To start out, I wrote simple HTML to position all elements and drew some containers and icons in Procreate. I wanted to go for a pixelated, 8-bit videogame style, because our theme as a team was videogames. The first thing I focused on was the 3D-element I was planning to implement. Various online sources on 3D CSS taught me the semantics of containers and elements needed to achieve the effect I was going for. My HTML is quite simple:
@@ -321,17 +323,87 @@ if (Array.isArray(category)) {
 
 ## External data source
 
+As an external data source (the API), I liked the idea of a sound library to add on to the video game experience. It could add sounds when the user interacts with the application and be an extra way to offer feedback to users. I Googled some free sound effects APIs and at last ended up with [Free Sound](https://freesound.org/), on which users can upload their own sounds.
+
+I've implemented the API by signing up on the website and creating a new project. All I had to do next was share the URL of the website and clarify for what purposes I was intending to use the API, and then I was given an API key and a Client ID.
+
+Normally, the API key shouldn't be pushed to Github, which can be guaranteed by storing it in something like a dotenv file. However, I couldn't use dotenv since I didn't build my webapp in an environment like node (I aimed to do as much vanilla as possible and stick to the file-architecture that was delivered with the repo). I discussed this with my coach Bas and since it's a public API, he suggested I skip the complexities and store the key in my script.js, as other people having access to it wouldn't be a problem.
+
+So that's what I did! I read the documentation of the API and wrote the following code to make use of it:
+
+```js
+// API
+const apiKey = "UGvJe4oBAcXQXhqsH80aSe7CwPk4r1cwKTrtP8Ai";
+
+// Navigation sound effect
+const navID = 106125;
+const navURL = `https://freesound.org/apiv2/sounds/${navID}/?token=${apiKey}`;
+
+// Shifting elements sound effect
+const elementsID = 391250;
+const elementsURL = `https://freesound.org/apiv2/sounds/${elementsID}/?token=${apiKey}`;
+
+// Navigation sound effect
+const likeID = 1234;
+const likeURL = `https://freesound.org/apiv2/sounds/${likeID}/?token=${apiKey}`;
+
+function playSound(url) {
+	const audio = new Audio(url);
+	audio
+		.play()
+		.catch((error) => console.error("Error playing the sound:", error));
+}
+```
+
+In my navigation function, I then called on the shifting elements sound effect with the following code:
+
+```js
+fetch(elementsURL)
+			.then((response) => response.json())
+			.then((data) => {
+				if (data && data.previews) {
+					// Use the preview URL to play the sound
+					playSound(data.previews["preview-hq-mp3"]);
+				}
+			})
+			.catch((error) => console.error("Error fetching sound data:", error));
+```
+
+In this code, the ID's are special codes tied to their respective sound effects. So I first searched which sounds I wanted to use, and then looked for their ID and wrote the code! Additionally, I used `data.previews` as a way to still get the sound despite CORS-forbidden rules.
+
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 <a id="achievements"></a>
 
 ## Achievements and let-go's
 
-<a id="process"></a>
+One specific thing I really wanted to achieve was a 3D-circling effect. I don't know why, but for some reason this idea has been in my head for ages. It always seemed too complex and so I didn't really start it or implement it, ever (despite its permanent residence in my head), but this project seemed like the perfect chance to take the leap and just tackle it. Naturally, the first thing I'm very proud of is that
+
+1. The 3D-effect works!
+
+But I'm also proud of:
+
+2. The stylistic (pixel) choices I've been able to streamline throughout the application;
+3. The custom audio player and its thumb that I learned about in the first Weekly Nerd;
+4. The way I've been able to handle different types of data (strings, numbers, arrays, objects) and made them work in my frontend;
+5. The calculations with which I've made the rotation animation work smoothly;
+6. The intuitive use of my API and the fact that it seamlessly works with user interactions;
+7. The semantics of my HTML and organization of my CSS - as well as the comments in my JS.
+
+There are also a few things that are not as perfect as I wished they'd be and I've had to keep on my wishlist. I call these
+
+***The let-go's***
+1. The strange jump on the first rotation, where the 3D-carousel just sort of skips an entire category;
+2. The less-than-ideal desktop-version (the site is fully responsive, but the desktop-version feels like a bit much as there's so many things in one viewport. If I had more time, I would've done something about that);
+3. A 'like'-button, I really liked the idea of tapping on a heart and having little hearts descend on the avatar, kind of like a way to give love or show appreciation. Again, considering the team-app I still had to do my part for, I've unfortunately had to let this go.
+
+All in all, what I've achieved outweighs what I've had to let go, and I've ultimately made a cute webapp that captures the essence of who I am.
 
 <!-- How about a license here? 📜 (or is it a licence?) 🤷 -->
 <a id="license"></a>
 
 ## License
+
+
 
 <a id="sources"></a>
 
