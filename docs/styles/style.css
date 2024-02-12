@@ -24,11 +24,30 @@ html {
 body {
     height: 100vh;
     width: 100vw;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
+}
+
+body::before {
+    content: "";
     background-image: url("../img/train.gif");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      opacity: 0.85;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    min-width: 100vw;
+    min-height: 100%;
 }
 
 #names {
@@ -37,6 +56,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 1em;
+    z-index: 9999;
 }
 
 #names > h1 {
@@ -178,10 +198,10 @@ button {
     min-height: 27vh;
     max-height: 27vh;
     padding: .5em 2em;
-    position: absolute;
+    /* position: absolute;
     bottom: 15vh;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
     display: flex;
     flex-direction: column;
 }
@@ -331,4 +351,72 @@ input[type="range"]::-moz-range-track {
 .strength-bullet {
     list-style-type: square;
     padding: 0 0 0 1em;
+}
+
+@media (max-width: 900px ) {
+    .content {
+        flex-direction: column;
+        justify-content: space-around;
+        max-width: 100%;
+        min-height: 100%;
+    }
+
+    .avatar {
+        position: absolute;
+        bottom: 20vh;
+    }
+
+    .information {
+        position: absolute;
+        bottom: 15vh;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (min-width: 900px ) {
+    .content {
+        flex-direction: row;
+        justify-content: space-around;
+        max-width: 100%;
+        min-height: 100%;
+    }
+
+    .content > * {
+        align-items: center;
+        margin: auto auto 22em auto;
+    }
+
+    .avatar {
+        transform: scale(1.5);
+        margin-bottom: 2em;
+    }
+
+    .information {
+        transform: scale(1.2);
+        min-width: 300px;
+        max-width: 300px;
+    }
+
+    #infotext {
+        align-self: flex-start;
+    }
+
+    #player {
+        max-width: 12vw;
+        margin-left: 1vw;
+    }
+
+    #leveldisplay {
+        max-width: 17em;
+        gap: 1em;
+    }
+
+     #leveldisplay {
+        max-width: 20vw;
+    }
+
+    #levelindicator::after {
+         right: -1vw;
+    }
 }
