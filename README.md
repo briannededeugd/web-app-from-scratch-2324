@@ -2,7 +2,7 @@
 
 # MY PERSONAL SITE - BRIANNE
 
-<img src="./docs/readme-img/banner.png" alt="" width="900px"><img src="./docs/readme-img/phonebanner.png" alt="" width="175px">
+<img src="./docs/readme-img/banner.png" alt="" width="900px">
 
 Welcome to this interactive mini-site I built for the course Webapps From Scratch, meant to be a creative sort of introduction. In this work of mine, you'll find a pixelated version of me, surrounded by the things I feel introduce who I am as a person on a surface-level. The application's style is greatly inspired by infamous pixelated videogames like Stardew Valley, Pacman and Super Mario, and it is best viewed on a phone-format.
 
