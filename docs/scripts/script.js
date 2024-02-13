@@ -10,7 +10,7 @@ const prevLevel = document.querySelector("#prevlevel");
 const nextLevel = document.querySelector("#nextlevel");
 
 async function fetchData() {
-	const response = await fetch("../data.json");
+	const response = await fetch("./data.json");
 	data = await response.json();
 	console.log("THE DATA:", data);
 }
