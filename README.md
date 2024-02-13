@@ -53,7 +53,7 @@ Additionally, all interactions are accompanied by their own sounds from the exte
 
 ## Version log
 
-_WAFS V1_
+### _WAFS V1_ <br />
 *February 5th, 2024*<br/>
 
 Title: Initial code and project start.
@@ -64,7 +64,7 @@ Includes:
 - Initial CSS setup
 - Relevant file linking
 
-_WAFS V2_
+### _WAFS V2_ <br/>
 *February 6th, 2024*<br/>
 
 Title: Main feature and 3D-elements.
@@ -78,7 +78,7 @@ Includes:
 	2. Dynamic degrees en element positioning;
 	3. updateElementRotation() function on button click
 
-_WAFS V3.1_
+### _WAFS V3.1_ <br />
 *February 7th, 2024*<br/>
 
 Title: Dynamic information from dataset in frontend.
@@ -90,13 +90,13 @@ Includes:
 - Adding the updateInformation() function that's called on inside of updateElementRotation(), that checks which element is at the front and loads its data
 - Styling the body, global elements and added elements in CSS
 
-_WAFS V3.2_
+### _WAFS V3.2_
 
 Includes:
 - Added the updateElementRotationBackward() function that reverses the updateElementRotation(), including the necessary event listener
 - Updated the images of the information boxes (new drawings)
 
-_WAFS V4_
+### _WAFS V4_ <br/>
 *February 8th, 2024*<br/>
 
 Title: Soundtrack, data transformation and API integration.
@@ -110,7 +110,7 @@ Includes:
 - Adding range, currentTime and duration in HTML for audio player (soundtrack)
 - Styling audio player (colors, sizing, positioning)
 
-_WAFS V5_
+### _WAFS V5_ <br />
 *February 9th, 2024*<br/>
 
 Title: Added favicon, music playing functionality.
@@ -129,7 +129,7 @@ Includes:
 	9. Play and pause the song;
 	10. Display audio player if the element at the front of the avatar is 'Soundtrack'
 
-_WAFS V6_
+### _WAFS V6_ <br />
 *February 11th, 2024*<br/>
 
 Title: Display level and strengths uniquely and dynamically.
@@ -155,7 +155,7 @@ Includes:
 	3. ELSE the textContent of the bodytext is equal to the category
 - Level and Strengths styling in CSS
 
-_WAFS V7_
+### _WAFS V7_ <br />
 *February 12th, 2024*<br/>
 
 Title: Responsiveness and team data
@@ -164,7 +164,7 @@ Includes:
 - Adding grid/flex for small vs big screens
 - Editing data.json to include teamdata
 
-_WAFS V8_
+### _WAFS V8_ <br/>
 *February 13th, 2024*<br/>
 
 Title: Cleaning up
