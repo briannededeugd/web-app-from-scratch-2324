@@ -2,6 +2,8 @@
 
 # MY PERSONAL SITE - BRIANNE
 
+<img src="./docs/readme-img/banner.png" alt="" width="900px"><img src="./docs/readme-img/phonebanner.png" alt="" width="175px">
+
 Welcome to this interactive mini-site I built for the course Webapps From Scratch, meant to be a creative sort of introduction. In this work of mine, you'll find a pixelated version of me, surrounded by the things I feel introduce who I am as a person on a surface-level. The application's style is greatly inspired by infamous pixelated videogames like Stardew Valley, Pacman and Super Mario, and it is best viewed on a phone-format.
 
 <!-- Add a nice poster image here at the end of the week, showing off your shiny frontend 📸 -->
@@ -34,10 +36,144 @@ There you go, now you've installed the app! For a better experience, navigate to
 
 ## Features and use
 
+The project is fairly straightforward in use! You'll be met with the sight of my mini-me, surrounded by a few icons we'll refer to as "elements". Each element has its own color and its own meaning, which we'll discover more about later. For now, focus on the blue arrows at the bottom of the screen - those are your navigation arrows!
+
+By default, we're on the 'bio'-element, which we can also tell by the color of the information box. When we use our navigation arrows, the elements shift and rotate around 'my' head, and the information box updates accordingly.
+
+Here's a description of each element:
+1. BIO: Tells you about me and how to keep me happy;
+2. STRENGTHS: A comprehensive list on things I'm good at (my strengths) as a character;
+3. NATIVE: Shows what areas I am 'native' to;
+4. SOUNDTRACK: A music player that plays the official Brianne soundtrack;
+5. LEVEL: My age as a level progression, with little me running the race.
+
+Additionally, all interactions are accompanied by their own sounds from the external data source (API)!
+
 <a id="versionlog"></a>
 
 ## Version log
-(Explain commits)
+
+_WAFS V1_
+*February 5th, 2024*<br/>
+
+Title: Initial code and project start.
+
+Includes:
+- Plan for design (sketch)
+- Initial HTML setup
+- Initial CSS setup
+- Relevant file linking
+
+_WAFS V2_
+*February 6th, 2024*<br/>
+
+Title: Main feature and 3D-elements.
+
+Includes:
+- Images of elements, drawn digitally by myself
+- Rotation system in HTML
+- Rotation system in CSS
+- JS functions for making rotation interactive
+	1. Variables for selecting HTML elements;
+	2. Dynamic degrees en element positioning;
+	3. updateElementRotation() function on button click
+
+_WAFS V3.1_
+*February 7th, 2024*<br/>
+
+Title: Dynamic information from dataset in frontend.
+
+Includes:
+- Images of more elements, drawn digitally by myself (information box, navigation buttons, name sign)
+- Information box in HTML (including initially hidden elements)
+- Updating the updateElementRotation() function to include a nextIndex to check the positioning of the element, and bring it back to 0 if it's the front again
+- Adding the updateInformation() function that's called on inside of updateElementRotation(), that checks which element is at the front and loads its data
+- Styling the body, global elements and added elements in CSS
+
+_WAFS V3.2_
+
+Includes:
+- Added the updateElementRotationBackward() function that reverses the updateElementRotation(), including the necessary event listener
+- Updated the images of the information boxes (new drawings)
+
+_WAFS V4_
+*February 8th, 2024*<br/>
+
+Title: Soundtrack, data transformation and API integration.
+
+Includes:
+- Integrating API by adding an API key, URLs with the token inside, then fetching the linked sound and playing it in updateElementRotation()
+- Creating data.json
+- Updating updateInformation() to handle arrays and arrays of objects
+- Styling the data in information box (heading and text)
+- Adding an audio to data folder
+- Adding range, currentTime and duration in HTML for audio player (soundtrack)
+- Styling audio player (colors, sizing, positioning)
+
+_WAFS V5_
+*February 9th, 2024*<br/>
+
+Title: Added favicon, music playing functionality.
+
+Includes:
+- Favicon
+- Music playing functionality
+	1. When song is loaded, display its duration;
+	2. Calculate time in minutes and seconds (using Math.floor);
+	3. Display the duration (function);
+	4. Match song's current time with slider's value;
+	5. Set slider max to match song's duration;
+	6. Check song's readyState, display everything if it's loaded (so, ready);
+	7. Change time on slider value change, change slider value on time change;
+	8. Update song time and text on slider value change;
+	9. Play and pause the song;
+	10. Display audio player if the element at the front of the avatar is 'Soundtrack'
+
+_WAFS V6_
+*February 11th, 2024*<br/>
+
+Title: Display level and strengths uniquely and dynamically.
+
+Includes:
+- BUG FIX: Audio pauseable/playable even when user has rotated
+- Data.json edited -> "strengths" to an array of strings
+- Build custom leveldisplay in HTML (progressbar)
+- Dynamic level text in JS, including current level and next level
+- Level display styling in CSS
+- Dynamic level display with JS
+	1. Previous level is age;
+	2. Next level is age + 1;
+- Transforming data for frontend showing
+	1. IF the current element is native:
+		1. Initializing an empty string to the HTML;
+		2. For each key and value, a string is added that looks like `${key}: ${value}`;
+	2. ELSE IF it's strengths:
+		1. Starting with an empty unordered list;
+		2. Looping through each strength in the array and add it as a list item;
+		3. Closing the unordered list;
+		4. Setting the textContent of the information box's bodytext to the list;
+	3. ELSE the textContent of the bodytext is equal to the category
+- Level and Strengths styling in CSS
+
+_WAFS V7_
+*February 12th, 2024*<br/>
+
+Title: Responsiveness and team data
+
+Includes:
+- Adding grid/flex for small vs big screens
+- Editing data.json to include teamdata
+
+_WAFS V8_
+*February 13th, 2024*<br/>
+
+Title: Cleaning up
+
+Includes:
+- Changing data locations and paths
+- Changing button looks and colors
+- Editing data to streamline with team
+- Adding clarifying comments
 
 <!-- What external data source is featured in your project and what are its properties 🌠 -->
 <a id="externaldatasource"></a>
@@ -124,7 +260,27 @@ All in all, what I've achieved outweighs what I've had to let go, and I've ultim
 
 ## License
 
+MIT License
 
+Copyright (c) 2023 Brianne
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 <a id="sources"></a>
 
