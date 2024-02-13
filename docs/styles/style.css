@@ -46,13 +46,13 @@ body::before {
 .content {
     display: flex;
     flex-direction: column;
-    min-width: 100vw;
     min-height: 100%;
 }
 
 #names {
     display: flex;
     flex-direction: column;
+    gap: 0;
     justify-content: center;
     align-items: center;
     margin-top: 1em;
@@ -60,7 +60,8 @@ body::before {
 }
 
 #names > h1 {
-    background-image: url('../img/nameboard.jpeg');
+    background-image: url('../img/nameboard.png');
+    font-size: 2em;
     width: max-content;
     height: auto;
     padding: 1em;
@@ -71,9 +72,11 @@ body::before {
 }
 
 #names h2 {
-    font-size: small;
-    color: white;
+   font-size: 1.5em;
+    color: black;
     margin: 0;
+    position: absolute;
+    top: 12.5vh;
 }
 
 .rotation {
@@ -108,12 +111,12 @@ button {
 #prevButton {
     width: 50px;
     height: 50px;
-    position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .avatar > div {
+    position: absolute;
     top: 50%;
     left: 50%;
     transition: transform 1s ease-in-out; 
@@ -123,24 +126,18 @@ button {
     background-image: url("../img/next.png");
     border: none;
     background-color: transparent;
-    right: 5vw;
-    bottom: 5vh;
-}
-
-#nextButton:active {
-    background-image: url("../img/darknext.png")
 }
 
 #prevButton {
     background-image: url("../img/prev.png");
     border: none;
     background-color: transparent;
-    left: 5vw;
-    bottom: 5vh;
 }
 
-#prevButton:active {
-    background-image: url("../img/darkprev.png")
+#nextButton:hover,
+#prevButton:hover {
+    transform: scale(1.25);
+    transition: all ease-out .1s;
 }
 
 
@@ -153,7 +150,7 @@ button {
     background: url("../img/bio.png");
     background-repeat: no-repeat;
     background-size: cover;
-    transform: translate(-50%, 100%) rotateY(0deg) translateZ(100px);
+    transform: translate(-50%, 150%) rotateY(0deg) translateZ(100px);
 }
 
 /* Level */
@@ -169,7 +166,7 @@ button {
    background: url("../img/soundtrack.png");
     background-repeat: no-repeat;
     background-size: cover;
-   transform: translate(-50%, -50%) rotateY(144deg) translateZ(100px);
+   transform: translate(-50%, -100%) rotateY(144deg) translateZ(100px);
 }
 
 /* Native to */
@@ -177,7 +174,7 @@ button {
     background: url("../img/nativeto.png");
     background-repeat: no-repeat;
     background-size: cover;
-    transform: translate(-50%, -50%) rotateY(216deg) translateZ(100px);
+    transform: translate(-50%, -100%) rotateY(216deg) translateZ(100px);
 }
 
 /* Strengths */
@@ -188,7 +185,10 @@ button {
     transform: translate(-50%, 50%) rotateY(288deg) translateZ(100px);
 }
 
+/* ***** */
 /* INFOS */
+/* ***** */
+
 .information {
     background: url("../img/biobox.jpg");
     background-repeat: no-repeat;
@@ -219,7 +219,10 @@ button {
     flex-grow: 1;
 }
 
+/* ************ */
 /* MEDIA PLAYER */
+/* ************ */
+
 #audio-player-container {
     justify-content: space-between;
     text-align: center;
@@ -353,6 +356,15 @@ input[type="range"]::-moz-range-track {
     padding: 0 0 0 1em;
 }
 
+ .buttons {
+    position: absolute;
+    bottom: 2.5vw;
+    display: flex;
+    justify-content: space-between;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 @media (max-width: 900px ) {
     .content {
         flex-direction: column;
@@ -372,14 +384,27 @@ input[type="range"]::-moz-range-track {
         left: 50%;
         transform: translateX(-50%);
     }
+
+    .buttons {
+    min-width: 90%;
+    max-width: 90%;
+    bottom: 4vh;
+    }
+
+    #names h2 {
+    top: 15vh;
+}
 }
 
 @media (min-width: 900px ) {
     .content {
         flex-direction: row;
         justify-content: space-around;
-        max-width: 100%;
-        min-height: 100%;
+        align-self: center;
+        gap: 15vw;
+        max-width: 70%;
+        min-height: 95%;
+        min-height: 95%;
     }
 
     .content > * {
@@ -418,5 +443,10 @@ input[type="range"]::-moz-range-track {
 
     #levelindicator::after {
          right: -1vw;
+    }
+
+    .buttons {
+        min-width: 60%;
+        max-width: 60%;
     }
 }

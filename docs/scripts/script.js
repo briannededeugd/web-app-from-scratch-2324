@@ -175,10 +175,10 @@ const strengths = document.querySelector(".strengths");
 // Then I determine the values of the degrees and positions of the circles
 const degrees = [0, 72, 144, 216, 288];
 const heights = [
-	"-50%, 100%",
+	"-50%, 150%",
 	"-50%, 50%",
-	"-50%, -50%",
-	"-50%, -50%",
+	"-50%, -100%",
+	"-50%, -100%",
 	"-50%, 50%",
 ];
 
