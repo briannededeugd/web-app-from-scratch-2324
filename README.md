@@ -13,6 +13,7 @@ Welcome to this interactive mini-site I built for the course Webapps From Scratc
 - [How to Install](#howtoinstall)
 - [Features and use](#featuresanduse)
 - [External data source](#externaldatasource)
+- [Accessibility](#accessibility)
 - [Achievements and let-go's](#achievements)
 - [Version Log](#versionlog)
 - [License](#license)
@@ -227,6 +228,21 @@ fetch(elementsURL)
 ```
 
 In this code, the ID's are special codes tied to their respective sound effects. So I first searched which sounds I wanted to use, and then looked for their ID and wrote the code! Additionally, I used `data.previews` as a way to still get the sound despite CORS-forbidden rules.
+
+<!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
+<a id="accessibility"></a>
+
+## Accessibility
+
+I tested the accessibility of my site using the screenreader on Firefox. Here's what I found:
+
+- When focused on an element, the element in question gets a blue and black outline.
+- The screen reader reads all headings and body content.
+- The hierarchy and semantics are correct: the screenreader works from h1 to <p> elements.
+- The site is interactive with just a keyboard.
+- All buttons have an aria-label that gets read by the screenreader, which tells the user what the button does.
+
+I'd say it's accessible!
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 <a id="achievements"></a>
