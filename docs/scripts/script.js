@@ -1,3 +1,12 @@
+/**========================================================================
+ * ?                                ABOUT
+ * @author         :  Brianne de Deugd
+ * @email          :  brianne.de.deugd@hva.nl
+ * @repo           :  https://github.com/briannededeugd/web-app-from-scratch-2324
+ * @createdOn      :  February 5th, 2024
+ * @description    :  This is my individual site for the course Web App From Scratch, Academic Year 2324, AUAS
+ *========================================================================**/
+
 console.log("Hello world");
 
 /**============================================
@@ -5,9 +14,6 @@ console.log("Hello world");
  *=============================================**/
 // Data JSON
 let data = {};
-const levelDisplay = document.querySelector("#leveldisplay");
-const prevLevel = document.querySelector("#prevlevel");
-const nextLevel = document.querySelector("#nextlevel");
 
 async function fetchData() {
 	const response = await fetch("./data.json");
@@ -24,15 +30,29 @@ function playSound(url) {
 		.catch((error) => console.error("Error playing the sound:", error));
 }
 
+/**============================================
+ *         SOUNDTRACK SONG FUNCTIONALITY
+ *=============================================**/
+
+// Variables
 let playsong = false;
 const song = new Audio("./data/audios/seasons.mp3");
 const durationContainer = document.querySelector("#duration");
 const songButton = document.querySelector("#play-icon img");
+const seekSlider = document.getElementById("seek-slider"); // song progression
+const currentTimeContainer = document.getElementById("current-time");
+const musicPlayer = document.querySelector("#audio-player-container");
+const playButton = document.querySelector("#play-icon");
 
 song.addEventListener("loadedmetadata", () => {
 	displayDuration();
 });
 
+/**======================
+ *    DISPLAYING TIME
+ *========================**/
+
+// Calculate time function to call upon when the time is called / needs to be transformed
 const calculateTime = (secs) => {
 	const minutes = Math.floor(secs / 60);
 	const seconds = Math.floor(secs % 60);
@@ -40,32 +60,15 @@ const calculateTime = (secs) => {
 	return `${minutes}:${returnedSeconds}`;
 };
 
+// Display the duration of the song in the frontend
 const displayDuration = () => {
 	durationContainer.textContent = calculateTime(song.duration);
 };
 
-if (song.readyState > 0) {
-	displayDuration();
-} else {
-	song.addEventListener("loadedmetadata", () => {
-		displayDuration();
-	});
-}
-
-// Seek slider (song progression)
-const seekSlider = document.getElementById("seek-slider");
-
-// when the slider changes, the song should change with it
-seekSlider.addEventListener("change", () => {
-	song.currentTime = seekSlider.value;
-});
-
-// the max of the slider is the max of the song
-const setSliderMax = () => {
-	seekSlider.max = Math.floor(song.duration);
-};
-
-// readyState is a built-in JS thing that checks whether an audio is loaded/ready to be played
+/**======================
+ *    SLIDER INTERACTION
+ *========================**/
+// Make sure that the song is ready before displaying duration, otherwise wait until it is with loadedmetadata
 if (song.readyState > 0) {
 	displayDuration();
 	setSliderMax();
@@ -77,7 +80,20 @@ if (song.readyState > 0) {
 	});
 }
 
-const currentTimeContainer = document.getElementById("current-time");
+// When the slider changes, the song should change with it
+seekSlider.addEventListener("change", () => {
+	song.currentTime = seekSlider.value;
+});
+
+// The max of the slider is equal to the max of the song
+const setSliderMax = () => {
+	seekSlider.max = Math.floor(song.duration);
+};
+
+/**======================
+ *      SONG CHANGE ON
+ * 		SLIDER CHANGE
+ *========================**/
 
 // when the user changes the slider input, the time changes
 seekSlider.addEventListener("input", () => {
@@ -98,6 +114,17 @@ song.addEventListener("timeupdate", () => {
 	currentTimeContainer.textContent = calculateTime(seekSlider.value);
 });
 
+/**======================
+ *    PLAYING AND PAUSING
+ *========================**/
+playButton.addEventListener("click", function () {
+	if (playsong === false) {
+		playSong();
+	} else {
+		pauseSong();
+	}
+});
+
 // Play the song
 function playSong() {
 	playsong = true;
@@ -111,7 +138,11 @@ function pauseSong() {
 	songButton.src = "./img/playbutton.png";
 }
 
-// API
+/**============================================
+ *               		API
+ *=============================================**/
+
+// API key
 const apiKey = "UGvJe4oBAcXQXhqsH80aSe7CwPk4r1cwKTrtP8Ai";
 
 // Navigation sound effect
@@ -126,31 +157,24 @@ const elementsURL = `https://freesound.org/apiv2/sounds/${elementsID}/?token=${a
 const likeID = 1234;
 const likeURL = `https://freesound.org/apiv2/sounds/${likeID}/?token=${apiKey}`;
 
-/**======================
- *    VARIABLES
- *========================**/
-// Soundtrack ++ Music
-const musicPlayer = document.querySelector("#audio-player-container");
-const playButton = document.querySelector("#play-icon");
+/**============================================
+ *          INFORMATION BOX VARIABLES
+ *=============================================**/
+// Level Element
+const levelDisplay = document.querySelector("#leveldisplay");
+const prevLevel = document.querySelector("#prevlevel");
+const nextLevel = document.querySelector("#nextlevel");
 
-playButton.addEventListener("click", function () {
-	if (playsong === false) {
-		playSong();
-	} else {
-		pauseSong();
-	}
-});
-
-// Username
+// Metadata
 const username = document.querySelector("#username");
-
-// Nickname
 const nickname = document.querySelector("#nickname");
 
-// DIV with information
+// Same for all elements
 const information = document.querySelector(".information");
+const infoHeading = document.querySelector("#infoname");
+const infoText = document.querySelector("#infotext");
 
-// Div background image
+// Background image of box is dependent on element
 const backgroundImageMapping = {
 	strengths: "url('./img/strengthsbox.jpg')",
 	bio: "url('./img/biobox.jpg')",
@@ -159,20 +183,18 @@ const backgroundImageMapping = {
 	native: "url('./img/nativetobox.jpg')",
 };
 
-// Div title
-const infoHeading = document.querySelector("#infoname");
+/**============================================
+ *              ROTATION VARIABLES
+ *=============================================**/
 
-// Div body
-const infoText = document.querySelector("#infotext");
-
-// First circles/icons
+// Element icons
 const bio = document.querySelector(".bio");
 const level = document.querySelector(".level");
 const soundtrack = document.querySelector(".soundtrack");
 const native = document.querySelector(".native");
 const strengths = document.querySelector(".strengths");
 
-// Then I determine the values of the degrees and positions of the circles
+// Determine the values of the degrees and positions of the elements around 'my' head
 const degrees = [0, 72, 144, 216, 288];
 const heights = [
 	"-50%, 150%",
@@ -194,8 +216,13 @@ let elementDegreesIndex = {
 // I also define the same names as those in the index
 const elements = { strengths, bio, level, soundtrack, native };
 
-// The elements need to rotate when the user clicks the button, so the element is selected, the index of that element is taken,
-// then the index is used to adjust the height and position
+/**========================================================================
+ *                           FUNCTIONS
+ *========================================================================**/
+
+/**============================================
+ *          UPDATE ELEMENT ROTATIONS
+ *=============================================**/
 function updateElementRotation(elementKey) {
 	const element = elements[elementKey];
 	let index = elementDegreesIndex[elementKey];
@@ -227,6 +254,10 @@ function updateElementRotation(elementKey) {
 	updateInformation(elementKey, degrees[nextIndex]);
 }
 
+/**============================================
+ *     UPDATE THE SHOWN INFORMATION BASED
+ * 		ON ELEMENT @ THE FRONT (FORWARD)
+ *=============================================**/
 function updateInformation(elementKey, currentDegree) {
 	// Check if the currentDegree is 0
 	if (currentDegree === 0) {
@@ -293,6 +324,7 @@ function updateInformation(elementKey, currentDegree) {
 	}
 }
 
+// Event listener for rotating forwards on click
 document.getElementById("nextButton").addEventListener("click", function () {
 	// Update rotation for each element based on the current index
 	for (const elementKey in elements) {
@@ -300,6 +332,10 @@ document.getElementById("nextButton").addEventListener("click", function () {
 	}
 });
 
+/**============================================
+ *     UPDATE THE SHOWN INFORMATION BASED
+ *     ON ELEMENT @ THE FRONT (BACKWARDS)
+ *=============================================**/
 function updateElementRotationBackward(elementKey) {
 	const element = elements[elementKey];
 	let index = elementDegreesIndex[elementKey];
@@ -331,6 +367,7 @@ function updateElementRotationBackward(elementKey) {
 	updateInformation(elementKey, degrees[prevIndex]);
 }
 
+// Event listener for rotating backwards on click
 document.getElementById("prevButton").addEventListener("click", function () {
 	for (const elementKey in elements) {
 		updateElementRotationBackward(elementKey);
