@@ -238,7 +238,7 @@ I tested the accessibility of my site using the screenreader on Firefox. Here's 
 
 - When focused on an element, the element in question gets a blue and black outline.
 - The screen reader reads all headings and body content.
-- The hierarchy and semantics are correct: the screenreader works from h1 to <p> elements.
+- The hierarchy and semantics are correct: the screenreader works from `<h1>` to `<p>` elements.
 - The site is interactive with just a keyboard.
 - All buttons have an aria-label that gets read by the screenreader, which tells the user what the button does.
 
