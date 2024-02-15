@@ -16,7 +16,7 @@ console.log("Hello world");
 let data = {};
 
 async function fetchData() {
-	const response = await fetch("./data.json");
+	const response = await fetch("./info.json");
 	data = await response.json();
 	console.log("THE DATA:", data);
 }
